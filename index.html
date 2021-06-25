@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="runnerst.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MITHILESH K</title>
+</head>
+
+
+
+<body style="margin: 0px;background-color:rgb(77, 255, 77);overflow: hidden;">
+    
+    
+    
+    <audio id="BGM" controls="none" preload="auto" style="display:none">
+        <source src="Monkeys-Spinning-Monkeys.mp3" type="audio/mp3">
+    </audio>
+    <audio id="jump" controls="none" preload="auto" style="display:none">
+        <source src="jump.mp3" type="audio/mp3">
+    </audio>
+    <canvas onclick="motion()"></canvas>
+   
+   
+    <div id="tab" >
+        <div id="score">Click Space to Start</div>
+        <div id="highestscore"></div>
+    </div>
+    
+    <div id="shoutout">
+        <h1 style="font-family:'Courier New', Courier, monospace;">GAME OVER</h1>
+        <h1 id="scor"style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"></h1>
+        <h1 id="Highscoreloc" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"></h1>
+        <a href="javascript:location.reload(true)" style="color:ivory;font-size:25px;">Try Again</a>
+    </div>
+    
+    <script src="runnerjs.js"></script>
+</body>
+</html>
