@@ -130,7 +130,6 @@ function place(zran)
          {
             b=2*x;
             sid= 2*x;
-            holebf.fillRect(2*x,y+50,100,y+51)
             drawholebf();
             drawholebb();               
         }
@@ -138,8 +137,6 @@ function place(zran)
         
         b=2*x;
         sid= 2*x;
-        holeuf.fillStyle ='gray';
-        holeuf.fillRect(2*x,0,100,y-120)
         drawholeuf();
         drawholeub();
         }
