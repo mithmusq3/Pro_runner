@@ -62,7 +62,7 @@ if (pos%2=='0'){
           if(pos=='0'){   //start an hole initialization and background music
          
            place('1');   
-           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},100);
+           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},300);
            musq.play();
            musq.loop = true;
            }
