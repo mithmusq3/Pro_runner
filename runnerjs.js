@@ -20,7 +20,7 @@ var rand;
  // Designing box
 
  player.fillStyle = '#ff4d4d';         // reddish square box with side 50px 
- player.fillRect(x-450,y,50,50);       //posi   
+ player.fillRect(x-(450*x/640),y,50,50);       //posi   
  
  //Designing upper path 
 
@@ -62,7 +62,7 @@ if (pos%2=='0'){
           if(pos=='0'){   //start an hole initialization and background music
          
            place('1');   
-           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},250);
+           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},100);
            musq.play();
            musq.loop = true;
            }
@@ -85,7 +85,7 @@ function Uppertrain(){
     var Uppertrainmotion=requestAnimationFrame(Uppertrain)
         
     player.fillStyle = '#ff4d4d';
-    player.fillRect(x-450,t,50,50);
+    player.fillRect(x-(450*x/640),t,50,50);
  
         t=t-3;   // monitoring speed of motion
        
@@ -100,7 +100,7 @@ function Lowertrain(){
     player.clearRect(0,y-121,x*2,171);
     var Lowertrainmotion=requestAnimationFrame(Lowertrain)
     player.fillStyle = '#ff4d4d';
-    player.fillRect(x-450,t,50,50);
+    player.fillRect(x-(450*x/640),t,50,50);
  
          t=t+3; // monitoring speed of motion
          
@@ -125,11 +125,12 @@ else {
 }
 function place(zran)
 {
-
+   console.log('logged in success');
     if(zran=='1')
          {
             b=2*x;
             sid= 2*x;
+            holebf.fillRect(2*x,y+50,100,y+51)
             drawholebf();
             drawholebb();               
         }
@@ -137,6 +138,8 @@ function place(zran)
         
         b=2*x;
         sid= 2*x;
+        holeuf.fillStyle ='gray';
+        holeuf.fillRect(2*x,0,100,y-120)
         drawholeuf();
         drawholeub();
         }
@@ -149,9 +152,9 @@ function drawholebf(){
     holebf.fillRect(b,y+50,200,y+51);
     b-=8;
 
-    check1(x-450,t,b,sid);    
+    check1(x-(450*x/640),t,b,sid);    
     if((b==0)||(b<0)){
-        cancelAnimationFrame(boxf);      
+        cancelAnimationFrame(boxf);        
     }
 }
 
@@ -162,7 +165,7 @@ function drawholebb(){
     holebb.fillRect(sid+200,y+50,100,y+51);//third input here is painting repeatedly without clear the previous mark so its continuous  
     sid-=8;
     
-    if(sid==-200){
+    if(sid<=-230){
         cancelAnimationFrame(boxb);
         rand=Math.floor((Math.random()*2)+1);
         
@@ -175,7 +178,7 @@ function drawholeuf(){
     holeuf.fillStyle= '#4dff4d';
     holeuf.fillRect(b,0,200,y-120);
     b-=8;
-    check2(x-450,t,b,sid);
+    check2(x-(450*x/640),t,b,sid);
     
     if(b==0){
         cancelAnimationFrame(boxf);
@@ -189,7 +192,7 @@ function drawholeub(){
     holeub.fillRect(sid+200,0,100,y-120);
     sid-=8;
     
-    if(sid==-200){
+    if(sid<=-230){
         cancelAnimationFrame(boxb);
        
         rand=Math.floor((Math.random()*2)+1);
@@ -228,7 +231,10 @@ function check2(bx,by,ox,ox2)
 }
 
 function gameover()
-{   shoutout.style.display = 'visible';
+{   
+    document.getElementById('shoutout').style.display = 'visible';
+    document.getElementById('MrMainBody').style.overflow = 'auto';
+    document.getElementById('shoutoutsec').style.display = 'none';
     canvas.style.display = 'none';
     scor.innerHTML = 'Score :' + points;
     
