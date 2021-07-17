@@ -5,6 +5,7 @@ Quotient=Quotient*8;
 canvas.width = Quotient;
 canvas.height = window.innerHeight;
 var forpoints;
+var speedincreaser;
 var pos='0';
 const x= canvas.width/2;
 const y= canvas.height/2 ;
@@ -13,7 +14,7 @@ var sid=2*x;
 var points=0;
 var t=y;
 var rand;
-
+var speed=0;
  const background = canvas.getContext('2d');
  var musq = document.getElementById("BGM");
  var musqjump = document.getElementById("jump");
@@ -64,7 +65,7 @@ if (pos%2=='0'){
           if(pos=='0'){   //start an hole initialization and background music
          
            place('1');   
-           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},300);
+           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},100);
            musq.play();
            musq.loop = true;
            }
@@ -125,9 +126,10 @@ else {
     high_score = JSON.parse(high_score);
     hscoretab.innerHTML = "HighScore: " + high_score;
 }
+
 function place(zran)
-{
-   console.log('logged in success');
+{  
+   console.log('Speed:'+speed);
     if(zran=='1')
          {
             b=2*x;
@@ -152,7 +154,7 @@ function drawholebf(){
     boxf=requestAnimationFrame(drawholebf);
     holebf.fillStyle= '#4dff4d';
     holebf.fillRect(b,y+50,200,y+51);
-    b-=8;
+    b-=(6+speed);
 
     check1(x-(450*x/640),t,b,sid);    
     if((b==0)||(b<0)){
@@ -165,7 +167,7 @@ function drawholebb(){
     boxb=requestAnimationFrame(drawholebb);
     holebb.fillStyle= '#85e0e0';
     holebb.fillRect(sid+200,y+50,100,y+51);//third input here is painting repeatedly without clear the previous mark so its continuous  
-    sid-=8;
+    sid-=(6+speed);
     
     if(sid<=-230){
         cancelAnimationFrame(boxb);
@@ -179,10 +181,10 @@ function drawholeuf(){
     boxf=requestAnimationFrame(drawholeuf);
     holeuf.fillStyle= '#4dff4d';
     holeuf.fillRect(b,0,200,y-120);
-    b-=8;
+    b-=(6+speed);
     check2(x-(450*x/640),t,b,sid);
     
-    if(b==0){
+    if((b==0)||(b<0)){
         cancelAnimationFrame(boxf);
         
     }
@@ -192,7 +194,7 @@ function drawholeub(){
     boxb=requestAnimationFrame(drawholeub);
     holeub.fillStyle= '#85e0e0';
     holeub.fillRect(sid+200,0,100,y-120);
-    sid-=8;
+    sid-=(6+speed);
     
     if(sid<=-230){
         cancelAnimationFrame(boxb);
@@ -210,6 +212,7 @@ function check1(bx,by,ox,ox2)
         cancelAnimationFrame(boxf);
         cancelAnimationFrame(boxb);
         clearInterval(forpoints);
+        clearInterval(speedincreaser);
         musq.loop = false;
         musq.load();
         gameover();
@@ -224,6 +227,7 @@ function check2(bx,by,ox,ox2)
         cancelAnimationFrame(boxf);
         cancelAnimationFrame(boxb);
         clearInterval(forpoints);
+        clearInterval(speedincreaser);
         musq.loop = false;
         musq.load();
         gameover();
@@ -256,6 +260,9 @@ window.addEventListener('keydown', function (e) {
     if(key==32){
     	e.preventDefault();
     	motion();
+    }
+    if(key==9){
+    	e.preventDefault();
     }
 });
 
