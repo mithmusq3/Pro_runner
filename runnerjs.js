@@ -13,17 +13,23 @@ var b=2*x;
 var sid=2*x;
 var points=0;
 var t=y;
+var re=y;
+var rd;
 var rand;
 var speed=0;
+var degrot=0;
  const background = canvas.getContext('2d');
  var musq = document.getElementById("BGM");
  var musqjump = document.getElementById("jump");
  const player = canvas.getContext('2d');
-
+ var image=document.createElement("img");
+ image.src="playerA.png";
+ var imageb=document.createElement("img");
+ imageb.src="playerB.png";
  // Designing box
 
- player.fillStyle = '#ff4d4d';         // reddish square box with side 50px 
- player.fillRect(x-(450*x/640),y,50,50);       //posi   
+//  player.fillStyle = '#ff4d4d';         // reddish square box with side 50px 
+//  player.fillRect(x-(450*x/640),y,50,50);       //posi   
  
  //Designing upper path 
 
@@ -45,11 +51,21 @@ const holebb = canvas.getContext('2d');
 const holeuf = canvas.getContext('2d');
 const holeub = canvas.getContext('2d');
 
+// 
+
+var trial =canvas.getContext('2d');
+
+//
+//just to show the triangle image when the web page loads 
+
+    var ctx = canvas.getContext('2d');
+    // Draw frame
+    ctx.drawImage(document.getElementById('frame'), x-(450*x/640),y,50,50);
+  
 // if (typeof(Storage) !== "undefined") {
 //     localStorage.setItem("highscore_task2"," "); 
 //   }                                                                                                     
 //   const isStorage = 'undefined' !== typeof localStorage;
-
 
 function motion(){
     
@@ -58,6 +74,7 @@ if (pos%2=='0'){
        if(t==y)
         { 
             Uppertrain();
+            Rotateuptri();
             // musqjump.play();
      
              setTimeout(()=>{pos++;},500)  //prevent mixing of the animate function caused by clicking the mouse before it reaches the other part 
@@ -65,7 +82,7 @@ if (pos%2=='0'){
           if(pos=='0'){   //start an hole initialization and background music
          
            place('1');   
-           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},100);
+           forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},300);
            musq.play();
            musq.loop = true;
            }
@@ -76,23 +93,85 @@ if (pos%2=='0'){
         if(t==y-120)
         {
             Lowertrain();
+            Rotatedowntri();
             // musqjump.play();
 
         setTimeout(()=>{pos++;},500)   //prevent mixing of the animate function caused by clicking the mouse before it reaches the other part 
     }}
 }
 
+function Rotateuptri(){
+     trial.clearRect(0,y-121,x*2,171);
+     var Uprotation=requestAnimationFrame(Rotateuptri);
 
+    re=re-3; 
+
+    // save the unrotated trial of the canvas so we can restore it later
+    // the alternative is to untranslate & unrotate after drawing
+    trial.save();
+
+    // move to the center of the canvas
+    trial.translate(x-(450*x/640)+25,re+25);
+
+    // rotate the canvas to the specified degrees
+    trial.rotate(degrot*Math.PI/180);
+
+    // draw the image
+    // since the trial is rotated, the image will be rotated also
+    trial.drawImage(image,-25,-25,50,50);
+
+    // we’re done with the rotating so restore the unrotated trial
+    trial.restore();
+    degrot=degrot+4.59;
+    console.log('degrot : '+degrot);
+    console.log('re : '+re);
+    if(degrot>180){
+                     cancelAnimationFrame(Uprotation);
+                     console.log('re : '+re);
+                     degrot=0;
+                     rd=re;
+                     re=y;
+                } 
+}
+function Rotatedowntri(){
+    trial.clearRect(0,y-121,x*2,171);
+    var Downrotation=requestAnimationFrame(Rotatedowntri);
+
+   rd=rd+3; 
+
+   // save the unrotated trial of the canvas so we can restore it later
+   // the alternative is to untranslate & unrotate after drawing
+   trial.save();
+
+   // move to the center of the canvas
+   trial.translate(x-(450*x/640)+25,rd+25);
+
+   // rotate the canvas to the specified degrees
+   trial.rotate(degrot*Math.PI/180);
+
+   // draw the image
+   // since the trial is rotated, the image will be rotated also
+   trial.drawImage(imageb,-25,-25,50,50);
+
+   // we’re done with the rotating so restore the unrotated trial
+   trial.restore();
+   degrot=degrot+4.59;
+   console.log('degrot : '+degrot);
+   if(degrot>180){
+                    cancelAnimationFrame(Downrotation);
+                    degrot=0;
+               } 
+}
 function Uppertrain(){
     player.clearRect(0,y-121,x*2,171);
-    var Uppertrainmotion=requestAnimationFrame(Uppertrain)
-        
-    player.fillStyle = '#ff4d4d';
-    player.fillRect(x-(450*x/640),t,50,50);
+    var Uppertrainmotion=requestAnimationFrame(Uppertrain)   
+    // player.fillStyle = '#ff4d4d';
+    // player.fillRect(x-(450*x/640),t,50,50);
  
         t=t-3;   // monitoring speed of motion
        
         
+            
         if((t==y-120)||(t<y-120)){
             cancelAnimationFrame(Uppertrainmotion);
            
@@ -102,8 +181,8 @@ function Uppertrain(){
 function Lowertrain(){
     player.clearRect(0,y-121,x*2,171);
     var Lowertrainmotion=requestAnimationFrame(Lowertrain)
-    player.fillStyle = '#ff4d4d';
-    player.fillRect(x-(450*x/640),t,50,50);
+    // player.fillStyle = '#ff4d4d';
+    // player.fillRect(x-(450*x/640),t,50,50);
  
          t=t+3; // monitoring speed of motion
          
