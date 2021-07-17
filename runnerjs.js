@@ -1,6 +1,8 @@
 const canvas = document.querySelector('canvas')
 canvas.fillStyle = '#4dff4d';
-canvas.width = window.innerWidth;
+var Quotient = ( window.innerWidth - (window.innerWidth % 8)) /8;
+Quotient=Quotient*8;
+canvas.width = Quotient;
 canvas.height = window.innerHeight;
 var forpoints;
 var pos='0';
