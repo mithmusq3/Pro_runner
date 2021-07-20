@@ -63,7 +63,7 @@
         top:9%;
     }
 }
-@media screen and (max-width:480px){
+@media screen and (max-height:480px){
      #tab{
          bottom:4%;
      }
