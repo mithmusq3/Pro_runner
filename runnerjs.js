@@ -585,6 +585,7 @@ function gameover()
 {   clearInterval(speedincreaser);
     clearInterval(timeofgame);
     clearInterval(microvertical);
+    document.getElementById('tab').style.top = '9%';
     document.getElementById("MrMainBody").style.backgroundColor= "rgb(77, 255, 77)";
     document.getElementById('shoutout').style.display = 'visible';
     document.getElementById('MrMainBody').style.overflow = 'auto';
