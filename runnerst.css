@@ -66,10 +66,14 @@
 @media screen and (max-width:480px){
     #tab{
         top:80%;
+        left:4%;
+        right:67%;
     }
 }
 @media screen and (max-height:480px){
      #tab{
          top:80%;
+         left:4%;
+         right:67%;
      }
 }
