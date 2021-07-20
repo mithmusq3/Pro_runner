@@ -57,6 +57,14 @@ var vertadd=0;
  imagepu1.src="slowdown.png";
  var imageinv1=document.createElement("img");
  imageinv1.src="invinsible.png";
+ var imageroada=document.createElement("img");
+ imageroada.src="roadbasea.png";
+ var imageroadb=document.createElement("img");
+ imageroadb.src="roadbaseb.png";
+ var imagewateru=document.createElement("img");
+ imagewateru.src="waterholeup.png";
+ var imagewaterb=document.createElement("img");
+ imagewaterb.src="waterhole.png";
 //Instructions
 
 console.log('The Mine Token Ends the Game');
@@ -74,13 +82,15 @@ console.log('The Grey Token grants you the power of invinsibility for 10 seconds
 const upperpath = canvas.getContext('2d');
 upperpath.fillStyle = '#85e0e0';
 upperpath.fillRect(0,0,2*x,y-121);    //posi
-
+upperpath.fillStyle= '#162a3f';
+upperpath.fillRect(0,0,2*x,y-221);
 //Designing lower path 
 
 const lowerpath = canvas.getContext('2d');
 lowerpath.fillStyle = '#85e0e0';
-lowerpath.fillRect(0,y+51,2*x,y-51);    // posi
-
+lowerpath.fillRect(0,y+51,2*x,y);    // posi
+lowerpath.fillStyle= '#162a3f';
+lowerpath.fillRect(0,y+51+180,2*x,y);
 //Follow ups of hole 
 
 const holebf = canvas.getContext('2d');
@@ -97,6 +107,10 @@ var trial =canvas.getContext('2d');
 var imageofobj1=canvas.getContext('2d');
 var imageofpu1=canvas.getContext('2d');
 var imageofinv1=canvas.getContext('2d');
+var imageofroadb=canvas.getContext('2d');
+var imageofroada=canvas.getContext('2d');
+var imageofwaterb=canvas.getContext('2d');
+var imageofwateru=canvas.getContext('2d');
     var ctx = canvas.getContext('2d');
     // Draw Triangle
     ctx.drawImage(document.getElementById('frame'), x-(450*x/640),y,50,50);
@@ -125,7 +139,7 @@ if (pos%2=='0'){
            place('1');   
            speedincreaser=setInterval(()=>{speed+=1;},30000);
            timeofgame=setInterval(()=>{timer++;},1000);
-           microvertical=setInterval(()=>{vertadd+=0.5;},55000);
+           microvertical=setInterval(()=>{vertadd+=0.5;},60000);
            forpoints=setInterval(()=>{points++; score.innerHTML="Score :"+points;},100);
            musq.play();
            musq.loop = true;
@@ -346,26 +360,28 @@ function place(zran)
 }
 
 function drawholebf(){
-    
+    imageofwaterb.clearRect(b+6,y+49,206,181);
     boxf=requestAnimationFrame(drawholebf);
-    holebf.fillStyle= '#4dff4d';
+    // holebf.fillStyle= '#4dff4d';
+    holebf.fillStyle= '#162a3f';
     holebf.fillRect(b,y+50,200,y+51);
     b-=(6+speed-pu1speed);
+    imageofwaterb.drawImage(document.getElementById('frameH'),b+6,y+49,206,181);
     if(chkcondchek==0){
     check1(x-(450*x/640),t,b,sid);  
     }  
-    if((b==0)||(b<0)){
+    if((b<-180)){
         cancelAnimationFrame(boxf);        
     }
 }
 
 function drawholebb(){
-    
+    // imageofroadb.clearRect(sid+200,y+50,500,180);
     boxb=requestAnimationFrame(drawholebb);
-    holebb.fillStyle= '#85e0e0';
-    holebb.fillRect(sid+200,y+50,100,y+51);//third input here is painting repeatedly without clear the previous mark so its continuous  
+    holebb.fillStyle= '#162a3f';
+    holebb.fillRect(sid+200,y+50,100,y+51);//third input here is painting repeatedly without clear the previous mark so its continuous 
     sid-=(6+speed-pu1speed);
-    
+    imageofroadb.drawImage(document.getElementById('frameG'),sid+200+6,y+49,500,180);
     if(sid<=-230){
         cancelAnimationFrame(boxb);
         rand=Math.floor((Math.random()*2)+1);
@@ -373,26 +389,28 @@ function drawholebb(){
     }
 }
 function drawholeuf(){
-    
+    imageofwateru.clearRect(b+6,y-220,200,100);
     boxf=requestAnimationFrame(drawholeuf);
-    holeuf.fillStyle= '#4dff4d';
+    // holeuf.fillStyle= '#4dff4d';
+    holebf.fillStyle= '#162a3f';
     holeuf.fillRect(b,0,200,y-120);
     b-=(6+speed-pu1speed);
+    imageofwateru.drawImage(document.getElementById('frameI'),b+6,y-220,200,100);
     if(chkcondchek==0){
     check2(x-(450*x/640),t,b,sid);
     }
-    if((b==0)||(b<0)){
+    if((b<-180)){
         cancelAnimationFrame(boxf);
         
     }
 }
 function drawholeub(){
-    
+    // imageofroada.clearRect(sid+200,y-230,100,110);
     boxb=requestAnimationFrame(drawholeub);
-    holeub.fillStyle= '#85e0e0';
+    holeub.fillStyle= '#162a3f';
     holeub.fillRect(sid+200,0,100,y-120);
     sid-=(6+speed-pu1speed);
-    
+    imageofroada.drawImage(document.getElementById('frameF'),sid+200+6,y-220,500,100);
     if(sid<=-230){
         cancelAnimationFrame(boxb);
        
@@ -567,6 +585,7 @@ function gameover()
 {   clearInterval(speedincreaser);
     clearInterval(timeofgame);
     clearInterval(microvertical);
+    document.getElementById("MrMainBody").style.backgroundColor= "rgb(77, 255, 77)";
     document.getElementById('shoutout').style.display = 'visible';
     document.getElementById('MrMainBody').style.overflow = 'auto';
     document.getElementById('shoutoutsec').style.display = 'none';
