@@ -476,9 +476,7 @@ function callobj1(){
         obj1h=obj1h-(1.5+vertadd);
     }
     imageofobj1.drawImage(document.getElementById('frameC'),oux1,obj1h,25,25);
-    if(chkcondchek==0){
     checkobj1();
-    }
     if(oux1<=-25){
         cancelAnimationFrame(anicallobj1);
         countobj1++; 
@@ -544,7 +542,9 @@ function callpu1(){
 function checkobj1()
 { 
     if((x-(450*x/640)<=oux1)&&(oux1-(x-(450*x/640))<=51)&&(obj1h-re<=51)&&(re-obj1h<=26)){
+        imageofobj1.clearRect(oux1,obj1h,26,26);
         cancelAnimationFrame(anicallobj1);
+        if(chkcondchek==0){
         cancelAnimationFrame(boxf);
         cancelAnimationFrame(boxb);
         clearInterval(forpoints);
@@ -554,7 +554,7 @@ function checkobj1()
         musq.loop = false;
         musq.load();
         gameover();
-        
+    }
     }
     
 }
