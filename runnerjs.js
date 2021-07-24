@@ -4,6 +4,9 @@ var winx,winy;
 if(window.innerWidth<=window.innerHeight){
     winx=window.innerHeight;
     winy=window.innerWidth;
+     document.getElementById('tab').style.top = '80%';
+    document.getElementById('tab').style.left = '4%';
+    document.getElementById('tab').style.right = '67%';
 }
 else{
     winx=window.innerWidth;
@@ -630,24 +633,24 @@ window.addEventListener('keydown', function (e) {
     	e.preventDefault();
     }
 });
-var previousOrientation = window.orientation;
-var checkOrientation = function(){
-    if(window.orientation !== previousOrientation){
-        if(window.innerWidth<=window.innerHeight){
-            winx=window.innerHeight;
-            winy=window.innerWidth;
-        }
-        else{
-            winx=window.innerWidth;
-            winy=window.innerHeight;
-        }
-        var Quotient = ( winx - (winx % 8)) /8;
-        Quotient=Quotient*8;
-        canvas.width = Quotient;
-        canvas.height =winy;
-    }
-};
+// var previousOrientation = window.orientation;
+// var checkOrientation = function(){
+//     if(window.orientation !== previousOrientation){
+//         if(window.innerWidth<=window.innerHeight){
+//             winx=window.innerHeight;
+//             winy=window.innerWidth;
+//         }
+//         else{
+//             winx=window.innerWidth;
+//             winy=window.innerHeight;
+//         }
+//         var Quotient = ( winx - (winx % 8)) /8;
+//         Quotient=Quotient*8;
+//         canvas.width = Quotient;
+//         canvas.height =winy;
+//     }
+// };
 
-window.addEventListener("resize", checkOrientation, false);
-window.addEventListener("orientationchange", checkOrientation, false);
-var outofvariablesname=setInterval(checkOrientation, 2000);
+// window.addEventListener("resize", checkOrientation, false);
+// window.addEventListener("orientationchange", checkOrientation, false);
+// var outofvariablesname=setInterval(checkOrientation, 2000);
