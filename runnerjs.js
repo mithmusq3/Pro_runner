@@ -1,9 +1,18 @@
 const canvas = document.querySelector('canvas')
 canvas.fillStyle = '#4dff4d';
-var Quotient = ( window.innerWidth - (window.innerWidth % 8)) /8;
+var winx,winy;
+if(window.innerWidth<=window.innerHeight){
+    winx=window.innerHeight;
+    winy=window.innerWidth;
+}
+else{
+    winx=window.innerWidth;
+    winy=window.innerHeight;
+}
+var Quotient = ( winx - (winx % 8)) /8;
 Quotient=Quotient*8;
 canvas.width = Quotient;
-canvas.height = window.innerHeight;
+canvas.height =winy;
 var forpoints;
 var speedincreaser;
 var pos='0';
