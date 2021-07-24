@@ -42,6 +42,7 @@ var timeofgame;
 var timer=0;
 var microvertical;  
 var vertadd=0;
+var pu1checkdouble=0;
  const background = canvas.getContext('2d');
  var musq = document.getElementById("BGM");
  var musqjump = document.getElementById("jump");
@@ -562,11 +563,16 @@ function checkinv1()
 { 
     if((x-(450*x/640)<=inx1)&&(inx1-(x-(450*x/640))<=51)&&(inv1h-re<=51)&&(re-inv1h<=26)){
         imageofinv1.clearRect(inx1,inv1h,26,26);
+        if(pu1checkdouble==1){
+        clearTimeout(invinsiblepower);
+        musqpower.pause();
+        musqpower.currentTime = 0;
+        }
+        pu1checkdouble=1;
         chkcondchek=1;
         musqpower.play();
-        invinsiblepower=setTimeout(()=>{chkcondchek=0;musqpower.loop=true;musqpower.pause();},10000);
+        invinsiblepower=setTimeout(()=>{chkcondchek=0;pu1checkdouble=0;musqpower.loop=true;musqpower.pause();},10000);
         cancelAnimationFrame(anicallinv1);
-        
     }
     
 }
