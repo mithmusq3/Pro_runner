@@ -4,9 +4,6 @@ var winx,winy;
 if(window.innerWidth<=window.innerHeight){
     winx=window.innerHeight;
     winy=window.innerWidth;
-     document.getElementById('tab').style.top = '80%';
-    document.getElementById('tab').style.left = '4%';
-    document.getElementById('tab').style.right = '67%';
 }
 else{
     winx=window.innerWidth;
@@ -603,7 +600,6 @@ function gameover()
 {   clearInterval(speedincreaser);
     clearInterval(timeofgame);
     clearInterval(microvertical);
-    clearTimeout(outofvariablesname);
     document.getElementById('tab').style.top = '9%';
     document.getElementById("MrMainBody").style.backgroundColor= "rgb(77, 255, 77)";
     document.getElementById('shoutout').style.display = 'visible';
@@ -633,24 +629,4 @@ window.addEventListener('keydown', function (e) {
     	e.preventDefault();
     }
 });
-// var previousOrientation = window.orientation;
-// var checkOrientation = function(){
-//     if(window.orientation !== previousOrientation){
-//         if(window.innerWidth<=window.innerHeight){
-//             winx=window.innerHeight;
-//             winy=window.innerWidth;
-//         }
-//         else{
-//             winx=window.innerWidth;
-//             winy=window.innerHeight;
-//         }
-//         var Quotient = ( winx - (winx % 8)) /8;
-//         Quotient=Quotient*8;
-//         canvas.width = Quotient;
-//         canvas.height =winy;
-//     }
-// };
 
-// window.addEventListener("resize", checkOrientation, false);
-// window.addEventListener("orientationchange", checkOrientation, false);
-// var outofvariablesname=setInterval(checkOrientation, 2000);
